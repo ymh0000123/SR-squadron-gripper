@@ -1,0 +1,37 @@
+name: 内容抓取
+on:
+    schedule:
+        - cron: '0 0,12 * * *'
+    workflow_dispatch:
+env:
+  ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+  REPOS: ${{ secrets.REPOS }}
+
+jobs:
+    check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: 准备仓库文件
+              uses: actions/checkout@v2
+
+            - name: 准备Python
+              uses: actions/setup-python@main
+              with:
+                python-version: '3.8'
+            - name: 安装依赖
+              run: |
+                pip install -r requirements.txt
+            - name: set env
+              run: |
+                  echo "BASE_PATH=$(pwd)" >> $GITHUB_ENV && echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
+            - name: 运行
+              run: |
+                python app.py
+
+            - name: 提交 interactivity.json
+              uses: github-actions-x/commit@v2.9
+              with:
+                files: interactivity.json
+                message: "自动更新 interactivity.json"
+                branch: master
+                github_token: ${{ secrets.GITHUB_TOKEN }}

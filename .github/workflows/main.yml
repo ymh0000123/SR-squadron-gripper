@@ -35,3 +35,6 @@ jobs:
                 message: "自动更新 interactivity.json"
                 branch: master
                 github_token: ${{ secrets.GITHUB_TOKEN }}
+                name: github-actions[bot]
+                email: github-actions@noreply.github.com
+                rebase: 'true'

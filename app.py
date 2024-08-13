@@ -73,6 +73,7 @@ try:
             processed_issues.append({
                 'title': issue.get('title', '没有标题'),
                 'body': issue.get('body', '没有正文'),
+                'id': issue.get('id', '没有ID'),
                 'labels': labels,
                 'user_login': issue.get('user', {}).get('login', '没有作者登录名'),
                 'created_at': issue.get('created_at', '没有创建日期'),

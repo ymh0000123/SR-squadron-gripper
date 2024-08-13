@@ -77,7 +77,10 @@ try:
                 'labels': labels,
                 'user_login': issue.get('user', {}).get('login', '没有作者登录名'),
                 'created_at': issue.get('created_at', '没有创建日期'),
-                'timeline': timeline_data
+                'timeline': timeline_data,
+                'comments': issue.get('comments', '没有评论数'),
+                'html_url': issue.get('html_url', '没有HTML URL'),
+                'number': issue.get('number', '没有编号'),
             })
     
     # 将处理后的数据转换为 JSON
